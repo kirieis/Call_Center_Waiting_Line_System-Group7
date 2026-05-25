@@ -254,7 +254,3 @@ nhóm tôi đc sử dụng AI bạn hãy phân cho tôi 3 người công việc 
 phần công việc nào có nhiều cách làm để so sánh thực nghiệm
 
 ---
-
-hãy ghi lại context nội dung bạn đã trả lời cho tôi. 2 câu trả lời mới nhất của bạn xuất ra file docx dễ nhìn
-
----
