@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mxfile host="draw.io" modified="2026-05-28T00:00:00.000Z" agent="Antigravity" version="24.0.0" type="device">
+<mxfile host="draw.io" modified="2026-05-30T00:00:00.000Z" agent="Antigravity" version="24.0.0" type="device">
   <diagram id="class-diagram" name="Class Diagram">
     <mxGraphModel dx="2200" dy="1600" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1400" math="0" shadow="0">
       <root>
         <mxCell id="0"/>
         <mxCell id="1" parent="0"/>
 
-        <mxCell id="pkg_ui" value="&lt;b&gt;ui&lt;/b&gt;" style="shape=mxgraph.sysml.package;html=1;whiteSpace=wrap;align=left;verticalAlign=top;spacingTop=-2;spacingLeft=5;fontSize=12;strokeColor=#82b366;fillColor=#d5e8d4;strokeWidth=2;opacity=30;" vertex="1" parent="1">
-          <mxGeometry x="20" y="140" width="510" height="460" as="geometry"/>
+        <mxCell id="pkg_ui" value="&lt;b&gt;callcenter.ui&lt;/b&gt;" style="shape=mxgraph.sysml.package;html=1;whiteSpace=wrap;align=left;verticalAlign=top;spacingTop=-2;spacingLeft=5;fontSize=12;strokeColor=#82b366;fillColor=#d5e8d4;strokeWidth=2;opacity=30;" vertex="1" parent="1">
+          <mxGeometry x="20" y="140" width="510" height="430" as="geometry"/>
         </mxCell>
 
-        <mxCell id="pkg_core" value="&lt;b&gt;core&lt;/b&gt;" style="shape=mxgraph.sysml.package;html=1;whiteSpace=wrap;align=left;verticalAlign=top;spacingTop=-2;spacingLeft=5;fontSize=12;strokeColor=#6c8ebf;fillColor=#dae8fc;strokeWidth=2;opacity=30;" vertex="1" parent="1">
+        <mxCell id="pkg_core" value="&lt;b&gt;callcenter.core&lt;/b&gt;" style="shape=mxgraph.sysml.package;html=1;whiteSpace=wrap;align=left;verticalAlign=top;spacingTop=-2;spacingLeft=5;fontSize=12;strokeColor=#6c8ebf;fillColor=#dae8fc;strokeWidth=2;opacity=30;" vertex="1" parent="1">
           <mxGeometry x="560" y="140" width="510" height="460" as="geometry"/>
         </mxCell>
 
-        <mxCell id="pkg_storage" value="&lt;b&gt;storage&lt;/b&gt;" style="shape=mxgraph.sysml.package;html=1;whiteSpace=wrap;align=left;verticalAlign=top;spacingTop=-2;spacingLeft=5;fontSize=12;strokeColor=#d6b656;fillColor=#fff2cc;strokeWidth=2;opacity=30;" vertex="1" parent="1">
+        <mxCell id="pkg_storage" value="&lt;b&gt;callcenter.storage&lt;/b&gt;" style="shape=mxgraph.sysml.package;html=1;whiteSpace=wrap;align=left;verticalAlign=top;spacingTop=-2;spacingLeft=5;fontSize=12;strokeColor=#d6b656;fillColor=#fff2cc;strokeWidth=2;opacity=30;" vertex="1" parent="1">
           <mxGeometry x="1100" y="140" width="510" height="290" as="geometry"/>
         </mxCell>
 
-        <mxCell id="pkg_model" value="&lt;b&gt;model&lt;/b&gt;" style="shape=mxgraph.sysml.package;html=1;whiteSpace=wrap;align=left;verticalAlign=top;spacingTop=-2;spacingLeft=5;fontSize=12;strokeColor=#b85450;fillColor=#f8cecc;strokeWidth=2;opacity=30;" vertex="1" parent="1">
+        <mxCell id="pkg_model" value="&lt;b&gt;callcenter.model&lt;/b&gt;" style="shape=mxgraph.sysml.package;html=1;whiteSpace=wrap;align=left;verticalAlign=top;spacingTop=-2;spacingLeft=5;fontSize=12;strokeColor=#b85450;fillColor=#f8cecc;strokeWidth=2;opacity=30;" vertex="1" parent="1">
           <mxGeometry x="430" y="680" width="600" height="280" as="geometry"/>
         </mxCell>
 
-        <mxCell id="pkg_experiment" value="&lt;b&gt;experiment&lt;/b&gt;" style="shape=mxgraph.sysml.package;html=1;whiteSpace=wrap;align=left;verticalAlign=top;spacingTop=-2;spacingLeft=5;fontSize=12;strokeColor=#9673a6;fillColor=#e1d5e7;strokeWidth=2;opacity=30;" vertex="1" parent="1">
+        <mxCell id="pkg_experiment" value="&lt;b&gt;callcenter.experiment&lt;/b&gt;" style="shape=mxgraph.sysml.package;html=1;whiteSpace=wrap;align=left;verticalAlign=top;spacingTop=-2;spacingLeft=5;fontSize=12;strokeColor=#9673a6;fillColor=#e1d5e7;strokeWidth=2;opacity=30;" vertex="1" parent="1">
           <mxGeometry x="1100" y="480" width="510" height="210" as="geometry"/>
         </mxCell>
 
@@ -37,20 +37,20 @@
         </mxCell>
 
         <mxCell id="c_mainmenu" value="MainMenu" style="swimlane;fontStyle=1;align=center;startSize=28;html=1;collapsible=0;fontSize=13;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;" vertex="1" parent="1">
-          <mxGeometry x="40" y="175" width="230" height="170" as="geometry"/>
+          <mxGeometry x="40" y="175" width="240" height="180" as="geometry"/>
         </mxCell>
-        <mxCell id="c_mainmenu_attrs" value="- stateManager: StateManager&#xa;- input: InputHandler&#xa;- renderer: ConsoleRenderer" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=11;" vertex="1" parent="c_mainmenu">
-          <mxGeometry y="28" width="230" height="56" as="geometry"/>
+        <mxCell id="c_mainmenu_attrs" value="- router: CallRouter&#xa;- historyStore: CallHistoryStore&#xa;- input: InputHandler&#xa;- renderer: ConsoleRenderer" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=11;" vertex="1" parent="c_mainmenu">
+          <mxGeometry y="28" width="240" height="66" as="geometry"/>
         </mxCell>
         <mxCell id="c_mainmenu_sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=10;rotatable=0;labelPosition=left;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="c_mainmenu">
-          <mxGeometry y="84" width="230" height="8" as="geometry"/>
+          <mxGeometry y="94" width="240" height="8" as="geometry"/>
         </mxCell>
-        <mxCell id="c_mainmenu_methods" value="+ run(): void&#xa;+ display(): void&#xa;- handleChoice(choice: int): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=11;" vertex="1" parent="c_mainmenu">
-          <mxGeometry y="92" width="230" height="74" as="geometry"/>
+        <mxCell id="c_mainmenu_methods" value="+ run(): void&#xa;+ display(): void&#xa;- handleChoice(choice: int): void&#xa;- addNewCall(): void&#xa;- processNextCall(): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=11;" vertex="1" parent="c_mainmenu">
+          <mxGeometry y="102" width="240" height="74" as="geometry"/>
         </mxCell>
 
         <mxCell id="c_input" value="InputHandler" style="swimlane;fontStyle=1;align=center;startSize=28;html=1;collapsible=0;fontSize=13;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;" vertex="1" parent="1">
-          <mxGeometry x="40" y="400" width="230" height="170" as="geometry"/>
+          <mxGeometry x="40" y="400" width="230" height="150" as="geometry"/>
         </mxCell>
         <mxCell id="c_input_attrs" value="- scanner: Scanner" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=11;" vertex="1" parent="c_input">
           <mxGeometry y="28" width="230" height="26" as="geometry"/>
@@ -59,30 +59,17 @@
           <mxGeometry y="54" width="230" height="8" as="geometry"/>
         </mxCell>
         <mxCell id="c_input_methods" value="+ readInt(prompt: String): int&#xa;+ readString(prompt: String): String&#xa;+ readPhoneNumber(): String&#xa;+ readBoolean(prompt: String): boolean&#xa;+ close(): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=11;" vertex="1" parent="c_input">
-          <mxGeometry y="62" width="230" height="104" as="geometry"/>
+          <mxGeometry y="62" width="230" height="84" as="geometry"/>
         </mxCell>
 
         <mxCell id="c_renderer" value="ConsoleRenderer" style="swimlane;fontStyle=1;align=center;startSize=28;html=1;collapsible=0;fontSize=13;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;" vertex="1" parent="1">
-          <mxGeometry x="290" y="400" width="230" height="170" as="geometry"/>
+          <mxGeometry x="290" y="400" width="230" height="150" as="geometry"/>
         </mxCell>
         <mxCell id="c_renderer_sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=10;rotatable=0;labelPosition=left;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="c_renderer">
           <mxGeometry y="28" width="230" height="8" as="geometry"/>
         </mxCell>
         <mxCell id="c_renderer_methods" value="+ renderQueue(calls: List): void&#xa;+ renderCall(call: Call): void&#xa;+ renderHistory(calls: List): void&#xa;+ renderMessage(msg: String): void&#xa;+ renderMenu(options: String[]): void&#xa;+ clearScreen(): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=11;" vertex="1" parent="c_renderer">
-          <mxGeometry y="36" width="230" height="130" as="geometry"/>
-        </mxCell>
-
-        <mxCell id="c_state" value="StateManager" style="swimlane;fontStyle=1;align=center;startSize=28;html=1;collapsible=0;fontSize=13;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;" vertex="1" parent="1">
-          <mxGeometry x="290" y="175" width="230" height="185" as="geometry"/>
-        </mxCell>
-        <mxCell id="c_state_attrs" value="- router: CallRouter&#xa;- historyStore: CallHistoryStore" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=11;" vertex="1" parent="c_state">
-          <mxGeometry y="28" width="230" height="42" as="geometry"/>
-        </mxCell>
-        <mxCell id="c_state_sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=10;rotatable=0;labelPosition=left;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="c_state">
-          <mxGeometry y="70" width="230" height="8" as="geometry"/>
-        </mxCell>
-        <mxCell id="c_state_methods" value="+ addNewCall(...): void&#xa;+ processNextCall(): Call&#xa;+ getQueue(): List&#xa;+ getHistory(): List&#xa;+ searchHistory(keyword: String): List" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=11;" vertex="1" parent="c_state">
-          <mxGeometry y="78" width="230" height="103" as="geometry"/>
+          <mxGeometry y="36" width="230" height="110" as="geometry"/>
         </mxCell>
 
         <mxCell id="c_stdqueue" value="&lt;i&gt;&#171;interface&#187;&lt;/i&gt;&lt;br&gt;StandardQueue&amp;lt;T&amp;gt;" style="swimlane;fontStyle=1;align=center;startSize=42;html=1;collapsible=0;fontSize=13;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;" vertex="1" parent="1">
@@ -98,7 +85,7 @@
         <mxCell id="c_pqueue" value="PriorityCallQueue" style="swimlane;fontStyle=1;align=center;startSize=28;html=1;collapsible=0;fontSize=13;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;" vertex="1" parent="1">
           <mxGeometry x="580" y="420" width="230" height="170" as="geometry"/>
         </mxCell>
-        <mxCell id="c_pqueue_attrs" value="- heap: List" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=11;" vertex="1" parent="c_pqueue">
+        <mxCell id="c_pqueue_attrs" value="- heap: List&lt;Call&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=11;" vertex="1" parent="c_pqueue">
           <mxGeometry y="28" width="230" height="26" as="geometry"/>
         </mxCell>
         <mxCell id="c_pqueue_sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=10;rotatable=0;labelPosition=left;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="c_pqueue">
@@ -163,24 +150,24 @@
         <mxCell id="c_call" value="Call" style="swimlane;fontStyle=1;align=center;startSize=28;html=1;collapsible=0;fontSize=13;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=2;" vertex="1" parent="1">
           <mxGeometry x="450" y="720" width="260" height="220" as="geometry"/>
         </mxCell>
-        <mxCell id="c_call_attrs" value="- id: String&#xa;- callerName: String&#xa;- phoneNumber: String&#xa;- isVIP: boolean&#xa;- callCount: int&#xa;- priority: int&#xa;- timestamp: long&#xa;- status: CallStatus" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=11;" vertex="1" parent="c_call">
-          <mxGeometry y="28" width="260" height="120" as="geometry"/>
+        <mxCell id="c_call_attrs" value="- customerName: String&#xa;- phoneNumber: String&#xa;- isVIP: boolean&#xa;- repeatCalls: int&#xa;- orderNumber: int&#xa;- waitTime: int&#xa;- status: CallStatus" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=11;" vertex="1" parent="c_call">
+          <mxGeometry y="28" width="260" height="110" as="geometry"/>
         </mxCell>
         <mxCell id="c_call_sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=10;rotatable=0;labelPosition=left;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="c_call">
-          <mxGeometry y="148" width="260" height="8" as="geometry"/>
+          <mxGeometry y="138" width="260" height="8" as="geometry"/>
         </mxCell>
-        <mxCell id="c_call_methods" value="+ calculateBasePriority(): int&#xa;+ getters / setters&#xa;+ toString(): String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=11;" vertex="1" parent="c_call">
-          <mxGeometry y="156" width="260" height="60" as="geometry"/>
+        <mxCell id="c_call_methods" value="+ getBasePriority(): int&#xa;+ getAgedPriority(): int&#xa;+ incrementWaitTime(): void&#xa;+ getters / setters&#xa;+ toString(): String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=11;" vertex="1" parent="c_call">
+          <mxGeometry y="146" width="260" height="70" as="geometry"/>
         </mxCell>
 
         <mxCell id="c_status" value="&lt;i&gt;&#171;enumeration&#187;&lt;/i&gt;&lt;br&gt;CallStatus" style="swimlane;fontStyle=1;align=center;startSize=42;html=1;collapsible=0;fontSize=13;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=2;" vertex="1" parent="1">
-          <mxGeometry x="770" y="720" width="220" height="140" as="geometry"/>
+          <mxGeometry x="770" y="720" width="220" height="130" as="geometry"/>
         </mxCell>
         <mxCell id="c_status_sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=10;rotatable=0;labelPosition=left;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="c_status">
           <mxGeometry y="42" width="220" height="8" as="geometry"/>
         </mxCell>
-        <mxCell id="c_status_values" value="WAITING&#xa;PROCESSING&#xa;COMPLETED&#xa;CANCELLED" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=11;" vertex="1" parent="c_status">
-          <mxGeometry y="50" width="220" height="86" as="geometry"/>
+        <mxCell id="c_status_values" value="WAITING&#xa;SERVING&#xa;COMPLETED" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=11;" vertex="1" parent="c_status">
+          <mxGeometry y="50" width="220" height="76" as="geometry"/>
         </mxCell>
 
         <mxCell id="c_exp1" value="Exp1_PriorityQueue" style="swimlane;fontStyle=1;align=center;startSize=28;html=1;collapsible=0;fontSize=11;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=1.5;" vertex="1" parent="1">
@@ -232,10 +219,6 @@
           </mxGeometry>
         </mxCell>
 
-        <mxCell id="rel_menu_state" value="" style="endArrow=open;endSize=10;html=1;strokeWidth=1.5;" edge="1" source="c_mainmenu" target="c_state" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-
         <mxCell id="rel_menu_input" value="" style="endArrow=open;endSize=10;html=1;strokeWidth=1.5;" edge="1" source="c_mainmenu" target="c_input" parent="1">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
@@ -244,11 +227,11 @@
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
 
-        <mxCell id="rel_state_router" value="1" style="endArrow=open;endSize=10;html=1;strokeWidth=1.5;startArrow=diamondThin;startFill=1;startSize=14;" edge="1" source="c_state" target="c_router" parent="1">
+        <mxCell id="rel_menu_router" value="1" style="endArrow=open;endSize=10;html=1;strokeWidth=1.5;startArrow=diamondThin;startFill=1;startSize=14;" edge="1" source="c_mainmenu" target="c_router" parent="1">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
 
-        <mxCell id="rel_state_history" value="1" style="endArrow=open;endSize=10;html=1;strokeWidth=1.5;startArrow=diamondThin;startFill=1;startSize=14;" edge="1" source="c_state" target="c_history" parent="1">
+        <mxCell id="rel_menu_history" value="1" style="endArrow=open;endSize=10;html=1;strokeWidth=1.5;startArrow=diamondThin;startFill=1;startSize=14;" edge="1" source="c_mainmenu" target="c_history" parent="1">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
 
