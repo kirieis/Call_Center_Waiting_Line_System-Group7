@@ -3,52 +3,52 @@ package core;
 import java.util.List;
 
 /**
- * Interface hàng đợi tiêu chuẩn (FIFO).
+ * Standard Queue interface (FIFO).
  * 
- * Cung cấp các phép toán cơ bản cho hàng đợi:
+ * Provides basic operations for a queue:
  * enqueue, dequeue, peek, isEmpty, size, toList.
  * 
- * Được implement bởi PriorityCallQueue và CircularCallQueue.
+ * Implemented by PriorityCallQueue and CircularCallQueue.
  *
- * @param <T> Kiểu dữ liệu phần tử trong hàng đợi
+ * @param <T> Data type of elements in the queue
  */
 public interface StandardQueue<T> {
 
     /**
-     * Thêm phần tử vào hàng đợi.
-     * @param item phần tử cần thêm
+     * Enqueues an item into the queue.
+     * @param item element to add
      */
     void enqueue(T item);
 
     /**
-     * Lấy và xóa phần tử đầu hàng đợi.
-     * @return phần tử đầu hàng đợi
-     * @throws java.util.NoSuchElementException nếu hàng đợi rỗng
+     * Dequeues and returns the first element of the queue.
+     * @return front element of the queue
+     * @throws java.util.NoSuchElementException if the queue is empty
      */
     T dequeue();
 
     /**
-     * Xem phần tử đầu hàng đợi mà không xóa.
-     * @return phần tử đầu hàng đợi
-     * @throws java.util.NoSuchElementException nếu hàng đợi rỗng
+     * Peeks at the first element of the queue without removing it.
+     * @return front element of the queue
+     * @throws java.util.NoSuchElementException if the queue is empty
      */
     T peek();
 
     /**
-     * Kiểm tra hàng đợi có rỗng không.
-     * @return true nếu hàng đợi rỗng
+     * Checks if the queue is empty.
+     * @return true if the queue is empty
      */
     boolean isEmpty();
 
     /**
-     * Lấy số lượng phần tử trong hàng đợi.
-     * @return số phần tử
+     * Gets the number of elements in the queue.
+     * @return number of elements
      */
     int size();
 
     /**
-     * Chuyển hàng đợi thành danh sách (không thay đổi hàng đợi).
-     * @return danh sách các phần tử theo thứ tự ưu tiên
+     * Converts the queue to a List (without modifying the queue).
+     * @return list of elements in priority order
      */
     List<T> toList();
 }

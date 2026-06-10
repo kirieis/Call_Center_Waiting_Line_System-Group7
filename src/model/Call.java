@@ -1,17 +1,17 @@
 package model;
 
 /**
- * Lớp đại diện cho một cuộc gọi trong hệ thống Call Center.
+ * Class representing a call in the Call Center system.
  * 
- * Mỗi cuộc gọi chứa thông tin khách hàng, trạng thái ưu tiên,
- * và các thuộc tính phục vụ tính điểm ưu tiên (Priority Score).
+ * Each call contains customer information, priority status,
+ * and attributes for computing the Priority Score.
  * 
- * Công thức tính điểm ưu tiên cơ bản:
+ * Basic priority score formula:
  *   priorityScore = (isVIP ? VIP_BONUS : 0) + (repeatCalls * REPEAT_MULTIPLIER) + waitTime
  */
 public class Call {
 
-    // --- Thuộc tính ---
+    // --- Attributes ---
     private String customerId;
     private String customerName;
     private String phoneNumber;
@@ -23,12 +23,12 @@ public class Call {
     private CallStatus status;
     private long entryTime;
 
-    // --- Hằng số tính điểm ưu tiên (mặc định, có thể override qua config) ---
+    // --- Constants for priority score calculation (defaults, can be overridden via config) ---
     private static int VIP_BONUS = 50;
     private static int REPEAT_MULTIPLIER = 10;
 
     /**
-     * Constructor đầy đủ.
+     * Full Constructor.
      */
     public Call(String customerId, String customerName, String phoneNumber,
                 boolean isVIP, int repeatCalls, int orderNumber) {
@@ -45,8 +45,8 @@ public class Call {
     }
 
     /**
-     * Tính điểm ưu tiên cơ bản (không bao gồm aging).
-     * VIP +50, mỗi lần gọi lại +10.
+     * Calculates base priority score (excluding aging).
+     * VIP gets +50, each repeat call gets +10.
      */
     private int calculateBasePriority() {
         int score = 0;
@@ -58,34 +58,34 @@ public class Call {
     }
 
     /**
-     * Lấy điểm ưu tiên cơ bản (chưa tính waitTime).
+     * Gets base priority score (excluding waitTime).
      */
     public int getBasePriority() {
         return calculateBasePriority();
     }
 
     /**
-     * Lấy điểm ưu tiên đã tính aging (bao gồm waitTime).
+     * Gets aged priority score (including waitTime).
      */
     public int getAgedPriority() {
         return priorityScore + waitTime;
     }
 
     /**
-     * Tăng thời gian chờ lên 1 đơn vị.
+     * Increments wait time by 1 unit.
      */
     public void incrementWaitTime() {
         this.waitTime++;
     }
 
     /**
-     * Tăng thời gian chờ theo giá trị tùy chỉnh.
+     * Increments wait time by a custom amount.
      */
     public void incrementWaitTime(int amount) {
         this.waitTime += amount;
     }
 
-    // --- Cấu hình tĩnh cho điểm ưu tiên ---
+    // --- Static configuration for priority score ---
     public static void setVipBonus(int bonus) {
         VIP_BONUS = bonus;
     }
@@ -178,9 +178,9 @@ public class Call {
 
     @Override
     public String toString() {
-        return String.format("[%s] %s | SĐT: %s | VIP: %s | Gọi lại: %d | Điểm: %d | TT: %s",
+        return String.format("[%s] %s | Phone: %s | VIP: %s | Repeats: %d | Score: %d | Status: %s",
                 customerId, customerName, phoneNumber,
-                isVIP ? "Có" : "Không", repeatCalls,
+                isVIP ? "Yes" : "No", repeatCalls,
                 getAgedPriority(), status);
     }
 }

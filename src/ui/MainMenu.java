@@ -16,10 +16,10 @@ import java.util.List;
 import java.util.Properties;
 
 /**
- * Vòng lặp menu chính của hệ thống Call Center.
+ * Main menu loop of the Call Center system.
  * 
- * Cung cấp giao diện Console cho người vận hành (Operator) với các chức năng:
- * 1. Generate Random Data (10,000 cuộc gọi)
+ * Provides a Console interface for the Operator with functions:
+ * 1. Generate Random Data (10,000 calls)
  * 2. Auto Sort & Load to Queue
  * 3. Add New Call Manually
  * 4. View Waiting Queue (Priority)
@@ -41,7 +41,7 @@ public class MainMenu {
     private DataGenerator dataGen;
     private Properties config;
 
-    // Đường dẫn mặc định
+    // Default paths and values
     private String rawDataPath;
     private String historyPath;
     private int circularCapacity;
@@ -58,14 +58,14 @@ public class MainMenu {
     }
 
     /**
-     * Đọc cấu hình từ file settings.properties.
+     * Reads configuration from settings.properties file.
      */
     private void loadConfig() {
         config = new Properties();
         try (FileInputStream fis = new FileInputStream("src/config/settings.properties")) {
             config.load(fis);
         } catch (IOException e) {
-            System.out.println("  [!] Không tìm thấy settings.properties, dùng giá trị mặc định.");
+            System.out.println("  [!] settings.properties not found, using default values.");
         }
 
         rawDataPath = config.getProperty("data.raw.calls.path", "data/CustomerCalls.csv");
@@ -73,7 +73,7 @@ public class MainMenu {
         circularCapacity = Integer.parseInt(config.getProperty("circular.queue.capacity", "100"));
         generateCount = Integer.parseInt(config.getProperty("generator.default.count", "10000"));
 
-        // Cấu hình priority scoring
+        // Configure priority scoring
         int vipBonus = Integer.parseInt(config.getProperty("priority.vip.bonus", "50"));
         int repeatMul = Integer.parseInt(config.getProperty("priority.repeat.multiplier", "10"));
         Call.setVipBonus(vipBonus);
@@ -81,45 +81,45 @@ public class MainMenu {
     }
 
     /**
-     * Chạy vòng lặp menu chính.
+     * Runs the main menu loop.
      */
     public void run() {
         boolean running = true;
 
         while (running) {
             display();
-            int choice = input.readInt("  Nhập lựa chọn: ");
+            int choice = input.readInt("  Enter choice: ");
             running = handleChoice(choice);
         }
 
         input.close();
-        System.out.println("\n  ★ Cảm ơn bạn đã sử dụng hệ thống! Tạm biệt. ★\n");
+        System.out.println("\n  ★ Thank you for using the system! Goodbye. ★\n");
     }
 
     /**
-     * Hiển thị menu chính.
+     * Displays the main menu.
      */
     public void display() {
         String[] options = {
-                "1.  Sinh dữ liệu ngẫu nhiên (" + generateCount + " cuộc gọi)",
-                "2.  Tự động sắp xếp & nạp vào hàng đợi",
-                "3.  Thêm cuộc gọi mới (thủ công)",
-                "4.  Xem hàng đợi chờ (Priority Queue)",
-                "5.  Xử lý cuộc gọi tiếp theo",
-                "6.  Xem lịch sử cuộc gọi",
-                "7.  Tìm kiếm lịch sử cuộc gọi",
-                "8.  Áp dụng thuật toán Aging",
-                "9.  Xem trạng thái Circular Queue",
-                "10. Chạy thực nghiệm (Experiments)",
+                "1.  Generate random data (" + generateCount + " calls)",
+                "2.  Auto sort & load to queue",
+                "3.  Add new call (manual)",
+                "4.  View waiting queue (Priority Queue)",
+                "5.  Process next call",
+                "6.  View call history",
+                "7.  Search call history",
+                "8.  Apply Aging algorithm",
+                "9.  View Circular Queue status",
+                "10. Run experiments",
                 "",
-                "0.  Thoát"
+                "0.  Exit"
         };
         renderer.renderMenu(options);
     }
 
     /**
-     * Xử lý lựa chọn từ menu.
-     * @return false nếu người dùng chọn thoát
+     * Handles selection from the menu.
+     * @return false if operator selects exit
      */
     private boolean handleChoice(int choice) {
         switch (choice) {
@@ -156,133 +156,133 @@ public class MainMenu {
             case 0:
                 return false;
             default:
-                renderer.renderMessage("Lựa chọn không hợp lệ. Vui lòng chọn 0-10.");
+                renderer.renderMessage("Invalid choice. Please choose 0-10.");
         }
         return true;
     }
 
-    // ===== Chức năng 1: Sinh dữ liệu ngẫu nhiên =====
+    // ===== Function 1: Generate random data =====
     private void generateData() {
-        System.out.println("\n  ─── SINH DỮ LIỆU NGẪU NHIÊN ───");
+        System.out.println("\n  ─── GENERATE RANDOM DATA ───");
         dataGen.generate(generateCount, rawDataPath);
     }
 
-    // ===== Chức năng 2: Auto Sort & Load =====
+    // ===== Function 2: Auto Sort & Load =====
     private void autoSortAndLoad() {
-        System.out.println("\n  ─── TỰ ĐỘNG SẮP XẾP & NẠP HÀNG ĐỢI ───");
+        System.out.println("\n  ─── AUTO SORT & LOAD QUEUE ───");
         processor.reset();
         processor.loadFromCSV(rawDataPath);
 
-        // Gán queue đã sắp xếp cho router
+        // Assign sorted queue to router
         router.setPriorityQueue(processor.getQueue());
-        renderer.renderMessage("Hàng đợi ưu tiên đã sẵn sàng. Tổng: " 
-                + router.getQueueSize() + " cuộc gọi.");
+        renderer.renderMessage("Priority queue is ready. Total: " 
+                + router.getQueueSize() + " calls.");
     }
 
-    // ===== Chức năng 3: Thêm cuộc gọi mới =====
+    // ===== Function 3: Add new call manually =====
     private void addNewCall() {
-        System.out.println("\n  ─── THÊM CUỘC GỌI MỚI ───");
+        System.out.println("\n  ─── ADD NEW CALL ───");
 
-        String customerId = input.readString("  Nhập mã KH: ");
-        String customerName = input.readString("  Nhập tên KH: ");
+        String customerId = input.readString("  Enter Customer ID: ");
+        String customerName = input.readString("  Enter Customer Name: ");
         String phoneNumber = input.readPhoneNumber();
-        boolean isVIP = input.readBoolean("  Khách VIP?");
-        int repeatCalls = input.readInt("  Số lần gọi lại: ");
+        boolean isVIP = input.readBoolean("  VIP Customer?");
+        int repeatCalls = input.readInt("  Number of repeat calls: ");
 
         Call call = new Call(customerId, customerName, phoneNumber,
                 isVIP, repeatCalls, router.getQueueSize() + 1);
 
         router.addCall(call);
-        renderer.renderMessage("Đã thêm cuộc gọi thành công!");
+        renderer.renderMessage("Call added successfully!");
         renderer.renderCall(call);
     }
 
-    // ===== Chức năng 4: Xem hàng đợi =====
+    // ===== Function 4: View waiting queue =====
     private void viewWaitingQueue() {
-        System.out.println("\n  ─── HÀNG ĐỢI CHỜ (PRIORITY QUEUE) ───");
+        System.out.println("\n  ─── WAITING QUEUE (PRIORITY QUEUE) ───");
         List<Call> snapshot = router.getQueueSnapshot();
         renderer.renderQueue(snapshot);
     }
 
-    // ===== Chức năng 5: Xử lý cuộc gọi tiếp theo =====
+    // ===== Function 5: Process next call =====
     private void processNextCall() {
-        System.out.println("\n  ─── XỬ LÝ CUỘC GỌI TIẾP THEO ───");
+        System.out.println("\n  ─── PROCESS NEXT CALL ───");
         Call call = router.processNext();
 
         if (call == null) {
-            renderer.renderMessage("Không có cuộc gọi nào trong hàng đợi.");
+            renderer.renderMessage("No calls in queue.");
             return;
         }
 
-        renderer.renderMessage("Đang xử lý cuộc gọi:");
+        renderer.renderMessage("Processing call:");
         renderer.renderCall(call);
 
-        // Đánh dấu hoàn thành và lưu lịch sử
+        // Mark completed and save to history
         call.setStatus(CallStatus.COMPLETED);
         historyStore.save(call);
-        renderer.renderMessage("Cuộc gọi đã hoàn thành và lưu vào lịch sử.");
-        renderer.renderMessage("Còn lại trong hàng đợi: " + router.getQueueSize());
+        renderer.renderMessage("Call completed and saved to history.");
+        renderer.renderMessage("Remaining in queue: " + router.getQueueSize());
     }
 
-    // ===== Chức năng 6: Xem lịch sử =====
+    // ===== Function 6: View call history =====
     private void viewCallHistory() {
-        System.out.println("\n  ─── LỊCH SỬ CUỘC GỌI ───");
+        System.out.println("\n  ─── CALL HISTORY ───");
         List<Call> history = historyStore.loadAll();
         renderer.renderHistory(history);
     }
 
-    // ===== Chức năng 7: Tìm kiếm lịch sử =====
+    // ===== Function 7: Search call history =====
     private void searchCallHistory() {
-        System.out.println("\n  ─── TÌM KIẾM LỊCH SỬ CUỘC GỌI ───");
-        String keyword = input.readString("  Nhập từ khóa (tên, SĐT, mã KH): ");
+        System.out.println("\n  ─── SEARCH CALL HISTORY ───");
+        String keyword = input.readString("  Enter keyword (name, phone, customer ID): ");
         List<Call> results = historyStore.search(keyword);
 
         if (results.isEmpty()) {
-            renderer.renderMessage("Không tìm thấy cuộc gọi nào phù hợp với: \"" + keyword + "\"");
+            renderer.renderMessage("No calls matching: \"" + keyword + "\"");
         } else {
-            renderer.renderMessage("Tìm thấy " + results.size() + " kết quả:");
+            renderer.renderMessage("Found " + results.size() + " results:");
             renderer.renderQueue(results);
         }
     }
 
-    // ===== Chức năng 8: Áp dụng Aging =====
+    // ===== Function 8: Apply Aging Algorithm =====
     private void applyAging() {
-        System.out.println("\n  ─── ÁP DỤNG THUẬT TOÁN AGING ───");
+        System.out.println("\n  ─── APPLY AGING ALGORITHM ───");
         if (router.isQueueEmpty()) {
-            renderer.renderMessage("Hàng đợi rỗng. Không có gì để áp dụng aging.");
+            renderer.renderMessage("Queue is empty. Nothing to age.");
             return;
         }
 
         int sizeBefore = router.getQueueSize();
         router.applyAging();
-        renderer.renderMessage("Đã áp dụng Aging Algorithm cho " + sizeBefore + " cuộc gọi.");
-        renderer.renderMessage("Hàng đợi đã được cập nhật thứ tự ưu tiên mới.");
+        renderer.renderMessage("Applied Aging Algorithm to " + sizeBefore + " calls.");
+        renderer.renderMessage("Queue priorities have been updated.");
     }
 
-    // ===== Chức năng 9: Xem Circular Queue =====
+    // ===== Function 9: View Circular Queue =====
     private void viewCircularQueue() {
-        System.out.println("\n  ─── TRẠNG THÁI CIRCULAR QUEUE ───");
+        System.out.println("\n  ─── CIRCULAR QUEUE STATUS ───");
         List<Call> circularCalls = router.getCircularQueueSnapshot();
         int capacity = router.getCircularQueue().getCapacity();
         renderer.renderCircularQueueStatus(circularCalls, capacity);
     }
 
-    // ===== Chức năng 10: Chạy thực nghiệm =====
+    // ===== Function 10: Run experiments =====
     private void runExperiments() {
-        System.out.println("\n  ─── CHẠY THỰC NGHIỆM ───");
+        System.out.println("\n  ─── RUN EXPERIMENTS ───");
         String[] expOptions = {
                 "1. Exp1 - Priority Queue Performance",
                 "2. Exp2 - Aging Algorithm Test",
                 "3. Exp3 - History Lookup Benchmark",
-                "4. Chạy tất cả",
-                "0. Quay lại"
+                "4. Run all",
+                "0. Go back"
         };
 
         for (String opt : expOptions) {
             System.out.println("  " + opt);
         }
 
-        int expChoice = input.readInt("  Chọn thực nghiệm: ");
+        int expChoice = input.readInt("  Select experiment: ");
 
         switch (expChoice) {
             case 1:
@@ -295,7 +295,7 @@ public class MainMenu {
                 new Exp3_HistoryLookup().run();
                 break;
             case 4:
-                System.out.println("\n  === Chạy tất cả thực nghiệm ===\n");
+                System.out.println("\n  === Running all experiments ===\n");
                 new Exp1_PriorityQueue().run();
                 System.out.println();
                 new Exp2_AgingAlgorithm().run();
@@ -305,7 +305,7 @@ public class MainMenu {
             case 0:
                 break;
             default:
-                renderer.renderMessage("Lựa chọn không hợp lệ.");
+                renderer.renderMessage("Invalid choice.");
         }
     }
 }

@@ -5,13 +5,13 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * Bộ sinh dữ liệu ngẫu nhiên cho hệ thống Call Center.
+ * Random data generator for the Call Center system.
  * 
- * Sinh ra file CSV chứa N cuộc gọi ngẫu nhiên với:
- * - Tên khách hàng ngẫu nhiên (Việt Nam)
- * - Số điện thoại ngẫu nhiên (10 chữ số)
- * - Tỷ lệ VIP: ~15%
- * - Số lần gọi lại: 0-10
+ * Generates a CSV file containing N random calls with:
+ * - Random customer name (Vietnamese naming convention, no accents)
+ * - Random phone number (10 digits)
+ * - VIP percentage: ~15%
+ * - Number of repeat calls: 0-10
  * 
  * Output format: customerId,customerName,phoneNumber,isVIP,repeatCalls
  */
@@ -19,27 +19,27 @@ public class DataGenerator {
 
     private Random random;
 
-    // Mảng tên họ Việt Nam phổ biến
+    // Common Vietnamese last names (no accents)
     private static final String[] HO = {
-            "Nguyễn", "Trần", "Lê", "Phạm", "Hoàng", "Huỳnh",
-            "Phan", "Vũ", "Võ", "Đặng", "Bùi", "Đỗ",
-            "Hồ", "Ngô", "Dương", "Lý"
+            "Nguyen", "Tran", "Le", "Pham", "Hoang", "Huynh",
+            "Phan", "Vu", "Vo", "Dang", "Bui", "Do",
+            "Ho", "Ngo", "Duong", "Ly"
     };
 
-    // Mảng tên đệm
+    // Middle names (no accents)
     private static final String[] DEM = {
-            "Văn", "Thị", "Đức", "Minh", "Hoàng", "Thanh",
-            "Quốc", "Ngọc", "Hữu", "Phương", "Tuấn", "Bảo",
-            "Kim", "Anh", "Công", "Trung"
+            "Van", "Thi", "Duc", "Minh", "Hoang", "Thanh",
+            "Quoc", "Ngoc", "Huu", "Phuong", "Tuan", "Bao",
+            "Kim", "Anh", "Cong", "Trung"
     };
 
-    // Mảng tên chính
+    // First names (no accents)
     private static final String[] TEN = {
-            "An", "Bình", "Chi", "Dũng", "Em", "Phúc",
-            "Giang", "Hải", "Ích", "Khanh", "Linh", "Minh",
-            "Nam", "Oanh", "Phong", "Quang", "Sơn", "Thảo",
-            "Uyên", "Vinh", "Xuân", "Yến", "Đạt", "Hùng",
-            "Long", "Tâm", "Trí", "Hoa", "Lan", "Mai"
+            "An", "Binh", "Chi", "Dung", "Em", "Phuc",
+            "Giang", "Hai", "Ich", "Khanh", "Linh", "Minh",
+            "Nam", "Oanh", "Phong", "Quang", "Son", "Thao",
+            "Uyen", "Vinh", "Xuan", "Yen", "Dat", "Hung",
+            "Long", "Tam", "Tri", "Hoa", "Lan", "Mai"
     };
 
     public DataGenerator() {
@@ -47,10 +47,10 @@ public class DataGenerator {
     }
 
     /**
-     * Sinh N cuộc gọi ngẫu nhiên và ghi vào file CSV.
+     * Generates N random calls and writes them to a CSV file.
      * 
-     * @param count số cuộc gọi cần sinh (mặc định 10,000)
-     * @param outputPath đường dẫn file CSV đầu ra
+     * @param count number of calls to generate (default 10,000)
+     * @param outputPath output CSV file path
      */
     public void generate(int count, String outputPath) {
         FileHandler fileHandler = new FileHandler(outputPath);
@@ -77,11 +77,11 @@ public class DataGenerator {
         }
 
         fileHandler.writeLines(lines);
-        System.out.println("  [✓] Đã sinh " + count + " cuộc gọi ngẫu nhiên → " + outputPath);
+        System.out.println("  [✓] Generated " + count + " random calls -> " + outputPath);
     }
 
     /**
-     * Sinh tên ngẫu nhiên theo kiểu Việt Nam (Họ + Đệm + Tên).
+     * Generates random name in Vietnamese format (Last name + Middle name + First name).
      */
     private String randomName() {
         String ho = HO[random.nextInt(HO.length)];
@@ -91,11 +91,11 @@ public class DataGenerator {
     }
 
     /**
-     * Sinh số điện thoại ngẫu nhiên 10 chữ số (bắt đầu bằng 0).
+     * Generates random 10-digit phone number (starts with 0).
      */
     private String randomPhone() {
         StringBuilder sb = new StringBuilder("0");
-        // Đầu số phổ biến
+        // Common prefixes
         String[] dauSo = {"90", "91", "93", "94", "96", "97", "98", "86", "83", "84", "85", "88", "89"};
         sb = new StringBuilder("0" + dauSo[random.nextInt(dauSo.length)]);
         for (int i = 0; i < 7; i++) {
@@ -105,15 +105,15 @@ public class DataGenerator {
     }
 
     /**
-     * Sinh trạng thái VIP ngẫu nhiên (~15% tỷ lệ VIP).
+     * Generates random VIP status (~15% VIP rate).
      */
     private boolean randomVIP() {
         return random.nextInt(100) < 15;
     }
 
     /**
-     * Sinh số lần gọi lại ngẫu nhiên (0-10).
-     * Phân bố: 60% có 0 lần, 25% có 1-3 lần, 15% có 4-10 lần.
+     * Generates random number of repeat calls (0-10).
+     * Distribution: 60% have 0, 25% have 1-3, 15% have 4-10.
      */
     private int randomRepeatCalls() {
         int rand = random.nextInt(100);

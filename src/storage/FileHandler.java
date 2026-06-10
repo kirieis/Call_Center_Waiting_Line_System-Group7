@@ -5,32 +5,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Lớp xử lý đọc/ghi file cơ bản.
+ * Basic file read/write utility class.
  * 
- * Hỗ trợ:
- * - Đọc tất cả dòng từ file
- * - Ghi đè toàn bộ file
- * - Thêm dòng vào cuối file
+ * Supports:
+ * - Reading all lines from a file
+ * - Overwriting a file
+ * - Appending a line to a file
  * 
- * Sử dụng BufferedReader/BufferedWriter để tối ưu hiệu năng I/O.
+ * Uses BufferedReader/BufferedWriter to optimize I/O performance.
  */
 public class FileHandler {
 
     private String filePath;
 
     /**
-     * Khởi tạo FileHandler với đường dẫn file.
-     * @param filePath đường dẫn file (tương đối hoặc tuyệt đối)
+     * Initializes FileHandler with a file path.
+     * @param filePath path to the file (relative or absolute)
      */
     public FileHandler(String filePath) {
         this.filePath = filePath;
     }
 
     /**
-     * Đọc tất cả dòng từ file.
-     * Tự động tạo file nếu chưa tồn tại.
+     * Reads all lines from the file.
+     * Automatically returns an empty list if file doesn't exist.
      * 
-     * @return danh sách các dòng, rỗng nếu file không tồn tại
+     * @return list of lines, empty list if file does not exist
      */
     public List<String> readLines() {
         List<String> lines = new ArrayList<>();
@@ -47,17 +47,17 @@ public class FileHandler {
                 lines.add(line);
             }
         } catch (IOException e) {
-            System.out.println("  [!] Lỗi đọc file: " + e.getMessage());
+            System.out.println("  [!] File read error: " + e.getMessage());
         }
 
         return lines;
     }
 
     /**
-     * Ghi đè toàn bộ nội dung file.
-     * Tự động tạo thư mục cha nếu chưa tồn tại.
+     * Overwrites the entire file content.
+     * Automatically creates parent directories if they don't exist.
      * 
-     * @param lines danh sách dòng cần ghi
+     * @param lines list of lines to write
      */
     public void writeLines(List<String> lines) {
         ensureParentDirectory();
@@ -69,15 +69,15 @@ public class FileHandler {
                 writer.newLine();
             }
         } catch (IOException e) {
-            System.out.println("  [!] Lỗi ghi file: " + e.getMessage());
+            System.out.println("  [!] File write error: " + e.getMessage());
         }
     }
 
     /**
-     * Thêm một dòng vào cuối file.
-     * Tự động tạo file và thư mục nếu chưa tồn tại.
+     * Appends a single line to the end of the file.
+     * Automatically creates file and directory if they don't exist.
      * 
-     * @param line dòng cần thêm
+     * @param line line to append
      */
     public void appendLine(String line) {
         ensureParentDirectory();
@@ -87,12 +87,12 @@ public class FileHandler {
             writer.write(line);
             writer.newLine();
         } catch (IOException e) {
-            System.out.println("  [!] Lỗi append file: " + e.getMessage());
+            System.out.println("  [!] File append error: " + e.getMessage());
         }
     }
 
     /**
-     * Đảm bảo thư mục cha tồn tại.
+     * Ensures parent directories exist.
      */
     private void ensureParentDirectory() {
         File file = new File(filePath);
@@ -103,14 +103,14 @@ public class FileHandler {
     }
 
     /**
-     * Lấy đường dẫn file.
+     * Gets the file path.
      */
     public String getFilePath() {
         return filePath;
     }
 
     /**
-     * Kiểm tra file có tồn tại không.
+     * Checks if the file exists.
      */
     public boolean exists() {
         return new File(filePath).exists();

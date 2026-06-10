@@ -6,11 +6,11 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 /**
- * Hàng đợi ưu tiên sử dụng cấu trúc Max-Heap.
+ * Priority queue using a Max-Heap structure.
  * 
- * Cuộc gọi có điểm ưu tiên (aged priority) cao nhất sẽ được 
- * dequeue trước. Sử dụng ArrayList + thủ công siftUp/siftDown
- * để minh họa thuật toán Priority Queue.
+ * The call with the highest priority score (aged priority) will be 
+ * dequeued first. Uses ArrayList + manual siftUp/siftDown 
+ * to demonstrate the Priority Queue algorithm.
  * 
  * Implements StandardQueue<Call>.
  */
@@ -23,8 +23,8 @@ public class PriorityCallQueue implements StandardQueue<Call> {
     }
 
     /**
-     * Thêm cuộc gọi vào hàng đợi ưu tiên.
-     * Sau khi thêm, thực hiện siftUp để duy trì tính chất heap.
+     * Enqueues a call to the priority queue.
+     * Performs siftUp after addition to maintain heap properties.
      */
     @Override
     public void enqueue(Call call) {
@@ -33,13 +33,13 @@ public class PriorityCallQueue implements StandardQueue<Call> {
     }
 
     /**
-     * Lấy và xóa cuộc gọi có điểm ưu tiên cao nhất.
-     * Swap root với phần tử cuối, xóa cuối, rồi siftDown.
+     * Dequeues and returns the call with the highest priority.
+     * Swaps root with last element, removes last, then performs siftDown.
      */
     @Override
     public Call dequeue() {
         if (isEmpty()) {
-            throw new NoSuchElementException("Hàng đợi ưu tiên rỗng!");
+            throw new NoSuchElementException("Priority queue is empty!");
         }
         Call max = heap.get(0);
         Call last = heap.remove(heap.size() - 1);
@@ -51,12 +51,12 @@ public class PriorityCallQueue implements StandardQueue<Call> {
     }
 
     /**
-     * Xem cuộc gọi có điểm ưu tiên cao nhất mà không xóa.
+     * Peeks at the highest priority call without removing it.
      */
     @Override
     public Call peek() {
         if (isEmpty()) {
-            throw new NoSuchElementException("Hàng đợi ưu tiên rỗng!");
+            throw new NoSuchElementException("Priority queue is empty!");
         }
         return heap.get(0);
     }
@@ -72,8 +72,8 @@ public class PriorityCallQueue implements StandardQueue<Call> {
     }
 
     /**
-     * Trả về danh sách cuộc gọi theo thứ tự ưu tiên giảm dần.
-     * Tạo bản sao và sắp xếp, không ảnh hưởng heap gốc.
+     * Returns a copy of calls in descending priority order.
+     * Does not affect the original heap structure.
      */
     @Override
     public List<Call> toList() {
@@ -83,8 +83,8 @@ public class PriorityCallQueue implements StandardQueue<Call> {
     }
 
     /**
-     * Đẩy phần tử tại index lên trên để duy trì Max-Heap.
-     * So sánh với parent, nếu lớn hơn thì swap.
+     * Moves the element at index up to maintain Max-Heap properties.
+     * Compares with parent and swaps if greater.
      */
     private void siftUp(int index) {
         while (index > 0) {
@@ -99,8 +99,8 @@ public class PriorityCallQueue implements StandardQueue<Call> {
     }
 
     /**
-     * Đẩy phần tử tại index xuống dưới để duy trì Max-Heap.
-     * So sánh với 2 children, swap với child lớn nhất nếu cần.
+     * Moves the element at index down to maintain Max-Heap properties.
+     * Compares with children and swaps with the largest child if needed.
      */
     private void siftDown(int index) {
         int size = heap.size();
@@ -126,7 +126,7 @@ public class PriorityCallQueue implements StandardQueue<Call> {
     }
 
     /**
-     * Hoán đổi 2 phần tử trong heap.
+     * Swaps two elements in the heap.
      */
     private void swap(int i, int j) {
         Call temp = heap.get(i);
@@ -135,7 +135,7 @@ public class PriorityCallQueue implements StandardQueue<Call> {
     }
 
     /**
-     * Xây dựng lại heap sau khi thay đổi priority (dùng cho aging).
+     * Rebuilds the heap after priority updates (used for aging).
      */
     public void rebuildHeap() {
         for (int i = heap.size() / 2 - 1; i >= 0; i--) {
@@ -144,7 +144,7 @@ public class PriorityCallQueue implements StandardQueue<Call> {
     }
 
     /**
-     * Lấy danh sách tham chiếu trực tiếp (dùng cho AgingAlgorithm).
+     * Gets direct reference list (used by AgingAlgorithm).
      */
     public List<Call> getInternalList() {
         return heap;

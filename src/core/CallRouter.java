@@ -5,13 +5,13 @@ import model.CallStatus;
 import java.util.List;
 
 /**
- * Bộ điều phối cuộc gọi - Trung tâm quản lý luồng cuộc gọi.
+ * Call Router - Central call flow manager.
  * 
- * Chức năng:
- * - Nhận cuộc gọi mới → thêm vào cả PriorityQueue và CircularQueue
- * - Xử lý cuộc gọi tiếp theo (dequeue từ PriorityQueue)
- * - Áp dụng thuật toán Aging để tăng ưu tiên cho cuộc gọi chờ lâu
- * - Cung cấp snapshot trạng thái hàng đợi
+ * Functions:
+ * - Receives new calls -> adds to both PriorityQueue and CircularQueue
+ * - Processes next call (dequeue from PriorityQueue)
+ * - Applies Aging Algorithm to increase priority for long-waiting calls
+ * - Provides snapshots of queue status
  */
 public class CallRouter {
 
@@ -20,7 +20,7 @@ public class CallRouter {
     private AgingAlgorithm aging;
 
     /**
-     * Khởi tạo CallRouter với các queue mặc định.
+     * Initializes CallRouter with default queues.
      */
     public CallRouter() {
         this.priorityQueue = new PriorityCallQueue();
@@ -29,7 +29,7 @@ public class CallRouter {
     }
 
     /**
-     * Khởi tạo CallRouter với CircularQueue capacity tùy chỉnh.
+     * Initializes CallRouter with custom CircularQueue capacity.
      */
     public CallRouter(int circularCapacity) {
         this.priorityQueue = new PriorityCallQueue();
@@ -38,7 +38,7 @@ public class CallRouter {
     }
 
     /**
-     * Khởi tạo CallRouter với PriorityQueue có sẵn (từ CallProcessor).
+     * Initializes CallRouter with an existing PriorityQueue (from CallProcessor).
      */
     public CallRouter(PriorityCallQueue existingQueue, int circularCapacity) {
         this.priorityQueue = existingQueue;
@@ -47,11 +47,11 @@ public class CallRouter {
     }
 
     /**
-     * Thêm cuộc gọi mới vào hệ thống.
-     * Cuộc gọi được thêm vào cả PriorityQueue (để xử lý ưu tiên)
-     * và CircularQueue (để giới hạn tổng số cuộc gọi chờ).
+     * Adds a new call to the system.
+     * The call is enqueued to both PriorityQueue (for priority processing)
+     * and CircularQueue (to cap the total number of waiting calls).
      * 
-     * @param call cuộc gọi cần thêm
+     * @param call the call to add
      */
     public void addCall(Call call) {
         call.setStatus(CallStatus.WAITING);
@@ -60,10 +60,10 @@ public class CallRouter {
     }
 
     /**
-     * Xử lý cuộc gọi có ưu tiên cao nhất.
-     * Dequeue từ PriorityQueue, chuyển trạng thái sang PROCESSING.
+     * Processes the highest priority call.
+     * Dequeues from PriorityQueue, sets status to PROCESSING.
      * 
-     * @return cuộc gọi đã được xử lý, hoặc null nếu hàng đợi rỗng
+     * @return the processed call, or null if queue is empty
      */
     public Call processNext() {
         if (priorityQueue.isEmpty()) {
@@ -75,8 +75,8 @@ public class CallRouter {
     }
 
     /**
-     * Áp dụng thuật toán Aging lên tất cả cuộc gọi đang chờ.
-     * Sau khi tăng waitTime, rebuild heap để cập nhật thứ tự.
+     * Applies Aging Algorithm to all waiting calls.
+     * After waitTime increment, rebuilds heap to update priorities.
      */
     public void applyAging() {
         List<Call> waitingCalls = priorityQueue.getInternalList();
@@ -85,56 +85,56 @@ public class CallRouter {
     }
 
     /**
-     * Lấy snapshot hàng đợi ưu tiên (sắp xếp theo priority giảm dần).
+     * Gets priority queue snapshot (sorted by descending priority).
      */
     public List<Call> getQueueSnapshot() {
         return priorityQueue.toList();
     }
 
     /**
-     * Lấy snapshot hàng đợi vòng (thứ tự FIFO).
+     * Gets circular queue snapshot (FIFO order).
      */
     public List<Call> getCircularQueueSnapshot() {
         return circularQueue.toList();
     }
 
     /**
-     * Lấy PriorityCallQueue hiện tại.
+     * Gets the current PriorityCallQueue.
      */
     public PriorityCallQueue getPriorityQueue() {
         return priorityQueue;
     }
 
     /**
-     * Gán PriorityCallQueue mới (dùng khi load từ CallProcessor).
+     * Sets a new PriorityCallQueue (used when loading from CallProcessor).
      */
     public void setPriorityQueue(PriorityCallQueue queue) {
         this.priorityQueue = queue;
     }
 
     /**
-     * Lấy CircularCallQueue hiện tại.
+     * Gets the current CircularCallQueue.
      */
     public CircularCallQueue getCircularQueue() {
         return circularQueue;
     }
 
     /**
-     * Lấy AgingAlgorithm hiện tại.
+     * Gets the current AgingAlgorithm.
      */
     public AgingAlgorithm getAgingAlgorithm() {
         return aging;
     }
 
     /**
-     * Kiểm tra tổng thể hàng đợi có rỗng không.
+     * Checks if the queues are empty.
      */
     public boolean isQueueEmpty() {
         return priorityQueue.isEmpty();
     }
 
     /**
-     * Lấy tổng số cuộc gọi đang chờ trong PriorityQueue.
+     * Gets the total number of waiting calls in PriorityQueue.
      */
     public int getQueueSize() {
         return priorityQueue.size();

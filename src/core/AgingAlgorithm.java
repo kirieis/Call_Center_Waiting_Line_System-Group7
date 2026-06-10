@@ -4,15 +4,15 @@ import model.Call;
 import java.util.List;
 
 /**
- * Thuật toán Aging - Tăng điểm ưu tiên theo thời gian chờ.
+ * Aging Algorithm - Increases priority score based on waiting time.
  * 
- * Mục đích: Chống starvation (đói tài nguyên) cho các cuộc gọi 
- * có điểm ưu tiên thấp bằng cách tăng dần điểm khi chờ lâu.
+ * Purpose: Prevent starvation of low-priority calls
+ * by gradually increasing their priority score when they wait too long.
  * 
- * Cơ chế:
- * - Mỗi lần gọi applyAging(), duyệt tất cả cuộc gọi đang chờ
- * - Nếu thời gian chờ vượt ngưỡng (agingThresholdMs), tăng waitTime
- * - Điểm ưu tiên tổng = basePriority + waitTime (tự động tính qua getAgedPriority())
+ * Mechanism:
+ * - Each time applyAging() is called, loop through all waiting calls.
+ * - If wait duration exceeds the threshold (agingThresholdMs), increase waitTime.
+ * - Total priority score = basePriority + waitTime (automatically computed via getAgedPriority()).
  */
 public class AgingAlgorithm {
 
@@ -20,17 +20,17 @@ public class AgingAlgorithm {
     private int agingBoost;
 
     /**
-     * Khởi tạo với giá trị mặc định.
-     * Threshold: 30 giây, Boost: +5 điểm.
+     * Initializes with default values.
+     * Threshold: 30 seconds, Boost: +5 points.
      */
     public AgingAlgorithm() {
         this(30000, 5);
     }
 
     /**
-     * Khởi tạo với giá trị tùy chỉnh.
-     * @param agingThresholdMs ngưỡng thời gian (ms) trước khi boost
-     * @param agingBoost số điểm tăng thêm mỗi lần
+     * Initializes with custom values.
+     * @param agingThresholdMs time threshold (ms) before boost
+     * @param agingBoost points to add each time
      */
     public AgingAlgorithm(long agingThresholdMs, int agingBoost) {
         this.agingThresholdMs = agingThresholdMs;
@@ -38,10 +38,10 @@ public class AgingAlgorithm {
     }
 
     /**
-     * Áp dụng aging cho danh sách cuộc gọi.
-     * Duyệt từng cuộc gọi, nếu đã chờ quá ngưỡng thì tăng waitTime.
+     * Applies aging to a list of calls.
+     * Loops through calls; if wait duration is over threshold, increase waitTime.
      * 
-     * @param calls danh sách cuộc gọi đang chờ
+     * @param calls list of waiting calls
      */
     public void applyAging(List<Call> calls) {
         long currentTime = System.currentTimeMillis();
@@ -55,14 +55,14 @@ public class AgingAlgorithm {
     }
 
     /**
-     * Tính số điểm boost cho một cuộc gọi cụ thể.
-     * Có thể mở rộng logic tùy theo yêu cầu nghiệp vụ.
+     * Calculates boost score for a specific call.
+     * Can be extended based on business logic.
      * 
-     * @param call cuộc gọi cần tính boost
-     * @return số điểm tăng thêm
+     * @param call call to calculate boost for
+     * @return boost points to add
      */
     public int calculateBoost(Call call) {
-        // Boost cơ bản + thêm 1 điểm cho mỗi lần gọi lại (khuyến khích khách trung thành)
+        // Base boost + 1 additional point for each repeat call (encourages loyal customers)
         return agingBoost + (call.getRepeatCalls() > 0 ? 1 : 0);
     }
 

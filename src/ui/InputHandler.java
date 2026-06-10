@@ -3,13 +3,13 @@ package ui;
 import java.util.Scanner;
 
 /**
- * Xử lý nhận dữ liệu từ bàn phím với kiểm tra hợp lệ.
+ * Handles input from keyboard with validation.
  * 
- * Cung cấp các phương thức đọc input an toàn:
- * - readInt: đọc số nguyên với prompt
- * - readString: đọc chuỗi với prompt
- * - readPhoneNumber: đọc SĐT 10 chữ số
- * - readBoolean: đọc yes/no
+ * Provides safe input reading methods:
+ * - readInt: reads an integer with a prompt
+ * - readString: reads a string with a prompt
+ * - readPhoneNumber: reads a 10-digit phone number
+ * - readBoolean: reads yes/no (y/n)
  */
 public class InputHandler {
 
@@ -20,11 +20,11 @@ public class InputHandler {
     }
 
     /**
-     * Đọc số nguyên từ bàn phím.
-     * Lặp lại cho đến khi người dùng nhập đúng.
+     * Reads an integer from the keyboard.
+     * Loops until the user enters a valid integer.
      * 
-     * @param prompt thông báo hiển thị
-     * @return số nguyên hợp lệ
+     * @param prompt display message
+     * @return valid integer
      */
     public int readInt(String prompt) {
         while (true) {
@@ -33,16 +33,16 @@ public class InputHandler {
                 String input = scanner.nextLine().trim();
                 return Integer.parseInt(input);
             } catch (NumberFormatException e) {
-                System.out.println("  [!] Vui lòng nhập một số nguyên hợp lệ.");
+                System.out.println("  [!] Please enter a valid integer.");
             }
         }
     }
 
     /**
-     * Đọc chuỗi từ bàn phím.
+     * Reads a string from the keyboard.
      * 
-     * @param prompt thông báo hiển thị
-     * @return chuỗi đã nhập (đã trim)
+     * @param prompt display message
+     * @return entered string (trimmed)
      */
     public String readString(String prompt) {
         System.out.print(prompt);
@@ -50,27 +50,27 @@ public class InputHandler {
     }
 
     /**
-     * Đọc số điện thoại 10 chữ số.
-     * Kiểm tra: bắt đầu bằng 0, chỉ chứa chữ số, đúng 10 ký tự.
+     * Reads a 10-digit phone number.
+     * Validation: starts with 0, contains only digits, exactly 10 characters.
      * 
-     * @return số điện thoại hợp lệ
+     * @return valid phone number
      */
     public String readPhoneNumber() {
         while (true) {
-            System.out.print("  Nhập SĐT (10 chữ số): ");
+            System.out.print("  Enter phone number (10 digits): ");
             String phone = scanner.nextLine().trim();
             if (phone.matches("^0\\d{9}$")) {
                 return phone;
             }
-            System.out.println("  [!] SĐT phải có 10 chữ số và bắt đầu bằng 0. VD: 0901234567");
+            System.out.println("  [!] Phone number must have 10 digits and start with 0. E.g., 0901234567");
         }
     }
 
     /**
-     * Đọc giá trị boolean (y/n).
+     * Reads a boolean value (y/n).
      * 
-     * @param prompt thông báo hiển thị
-     * @return true nếu 'y' hoặc 'yes', false nếu 'n' hoặc 'no'
+     * @param prompt display message
+     * @return true if 'y' or 'yes', false if 'n' or 'no'
      */
     public boolean readBoolean(String prompt) {
         while (true) {
@@ -82,12 +82,12 @@ public class InputHandler {
             if (input.equals("n") || input.equals("no")) {
                 return false;
             }
-            System.out.println("  [!] Vui lòng nhập 'y' hoặc 'n'.");
+            System.out.println("  [!] Please enter 'y' or 'n'.");
         }
     }
 
     /**
-     * Đóng Scanner.
+     * Closes the Scanner.
      */
     public void close() {
         if (scanner != null) {

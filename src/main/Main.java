@@ -3,19 +3,19 @@ package main;
 import ui.MainMenu;
 
 /**
- * Lớp khởi chạy ứng dụng chính - Call Center Waiting Line System.
+ * Main application entry class - Call Center Waiting Line System.
  * 
- * Hệ thống giả lập quá trình quản lý cuộc gọi chờ,
- * ưu tiên khách hàng VIP hoặc khách hàng gọi lại nhiều lần.
+ * The system simulates the process of managing call queues,
+ * prioritizing VIP customers or customers with high repeat calls.
  * 
- * Cấu trúc dữ liệu sử dụng:
+ * Data structures used:
  * - Queue (StandardQueue interface)
  * - Priority Queue (PriorityCallQueue - Max Heap)
  * - Circular Queue (CircularCallQueue - Fixed Array)
  * 
- * Chạy trên Console only.
+ * Runs on Console only.
  * 
- * @author Group 7 - Nguyễn Văn An
+ * @author Group 7 - Nguyen Van An
  */
 public class Main {
 
@@ -29,8 +29,8 @@ public class Main {
         System.out.println("   ╚═════╝╚═╝  ╚═╝╚══════╝╚══════╝     ╚═════╝╚══════╝╚═╝  ╚═══╝   ╚═╝   ╚══════╝╚═╝  ╚═╝");
         System.out.println();
         System.out.println("  ┌─────────────────────────────────────────────────────┐");
-        System.out.println("  │  WAITING LINE SYSTEM - Hệ thống hàng đợi cuộc gọi  │");
-        System.out.println("  │  Phiên bản: 1.0  |  Group 7 - Nguyễn Văn An        │");
+        System.out.println("  │  WAITING LINE SYSTEM - Call Queue System            │");
+        System.out.println("  │  Version: 1.0  |  Group 7 - Nguyen Van An           │");
         System.out.println("  └─────────────────────────────────────────────────────┘");
         System.out.println();
 

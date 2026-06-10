@@ -6,28 +6,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Quản lý lịch sử cuộc gọi đã xử lý thành công.
+ * Manages history of successfully processed calls.
  * 
- * Chức năng:
- * - Lưu cuộc gọi đã hoàn thành vào file CSV
- * - Đọc toàn bộ lịch sử cuộc gọi
- * - Tìm kiếm cuộc gọi theo từ khóa (tên, SĐT, mã KH)
+ * Functions:
+ * - Saves completed calls into a CSV file
+ * - Loads all call history
+ * - Searches calls by keyword (name, phone, customer ID)
  * 
- * Format CSV: customerId,customerName,phoneNumber,isVIP,repeatCalls,orderNumber,priorityScore,status
+ * CSV format: customerId,customerName,phoneNumber,isVIP,repeatCalls,orderNumber,priorityScore,status
  */
 public class CallHistoryStore {
 
     private FileHandler fileHandler;
 
     /**
-     * Khởi tạo với đường dẫn file lịch sử mặc định.
+     * Initializes with default history file path.
      */
     public CallHistoryStore() {
         this("data/call_history.csv");
     }
 
     /**
-     * Khởi tạo với đường dẫn file tùy chỉnh.
+     * Initializes with custom file path.
      */
     public CallHistoryStore(String filePath) {
         this.fileHandler = new FileHandler(filePath);
@@ -35,7 +35,7 @@ public class CallHistoryStore {
     }
 
     /**
-     * Tạo header CSV nếu file chưa tồn tại.
+     * Creates CSV header if file doesn't exist.
      */
     private void initFileIfNeeded() {
         if (!fileHandler.exists()) {
@@ -46,10 +46,10 @@ public class CallHistoryStore {
     }
 
     /**
-     * Lưu cuộc gọi đã xử lý vào file lịch sử.
-     * Tự động đánh dấu trạng thái COMPLETED.
+     * Saves processed call into history file.
+     * Automatically sets status to COMPLETED.
      * 
-     * @param call cuộc gọi cần lưu
+     * @param call call to save
      */
     public void save(Call call) {
         call.setStatus(CallStatus.COMPLETED);
@@ -57,15 +57,15 @@ public class CallHistoryStore {
     }
 
     /**
-     * Đọc toàn bộ lịch sử cuộc gọi từ file.
+     * Reads entire call history from file.
      * 
-     * @return danh sách cuộc gọi đã xử lý
+     * @return list of processed calls
      */
     public List<Call> loadAll() {
         List<Call> calls = new ArrayList<>();
         List<String> lines = fileHandler.readLines();
 
-        // Bỏ qua header
+        // Skip header
         for (int i = 1; i < lines.size(); i++) {
             String line = lines.get(i).trim();
             if (!line.isEmpty()) {
@@ -75,7 +75,7 @@ public class CallHistoryStore {
                         calls.add(call);
                     }
                 } catch (Exception e) {
-                    // Bỏ qua dòng lỗi
+                    // Skip corrupt line
                 }
             }
         }
@@ -84,11 +84,11 @@ public class CallHistoryStore {
     }
 
     /**
-     * Tìm kiếm cuộc gọi theo từ khóa.
-     * Tìm trong: tên khách hàng, số điện thoại, mã khách hàng.
+     * Searches call history by keyword.
+     * Searches in: customer name, phone number, customer ID.
      * 
-     * @param keyword từ khóa tìm kiếm (không phân biệt hoa/thường)
-     * @return danh sách cuộc gọi phù hợp
+     * @param keyword search keyword (case-insensitive)
+     * @return list of matching calls
      */
     public List<Call> search(String keyword) {
         List<Call> all = loadAll();
@@ -107,7 +107,7 @@ public class CallHistoryStore {
     }
 
     /**
-     * Chuyển đối tượng Call thành chuỗi CSV.
+     * Converts a Call object to CSV string.
      */
     private String toCSV(Call call) {
         return String.join(",",
@@ -123,7 +123,7 @@ public class CallHistoryStore {
     }
 
     /**
-     * Parse chuỗi CSV thành đối tượng Call.
+     * Parses a CSV string to Call object.
      */
     private Call fromCSV(String line) {
         String[] parts = line.split(",");

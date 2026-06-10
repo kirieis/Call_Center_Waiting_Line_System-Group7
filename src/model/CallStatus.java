@@ -1,12 +1,12 @@
 package model;
 
 /**
- * Enum đại diện cho các trạng thái của một cuộc gọi trong hệ thống.
+ * Enum representing call statuses in the system.
  * 
- * - WAITING:    Cuộc gọi đang chờ trong hàng đợi
- * - PROCESSING: Cuộc gọi đang được xử lý bởi điện thoại viên
- * - COMPLETED:  Cuộc gọi đã được phục vụ xong
- * - MISSED:     Cuộc gọi bị lỡ (hàng đợi vòng đầy)
+ * - WAITING:    Call is waiting in the queue
+ * - PROCESSING: Call is being handled by an operator
+ * - COMPLETED:  Call has been successfully served
+ * - MISSED:     Call was missed (circular queue full)
  */
 public enum CallStatus {
     WAITING,

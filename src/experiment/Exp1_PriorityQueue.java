@@ -9,16 +9,16 @@ import java.util.Queue;
 import java.util.Random;
 
 /**
- * Thực nghiệm 1: Đo hiệu năng Priority Queue.
+ * Experiment 1: Measure Priority Queue Performance.
  * 
- * So sánh thời gian xử lý giữa:
- * - PriorityCallQueue (Max-Heap): sắp xếp ưu tiên tự động
- * - FIFO Queue (LinkedList): hàng đợi thông thường không ưu tiên
+ * Compares processing times between:
+ * - PriorityCallQueue (Max-Heap): automatic priority sorting
+ * - FIFO Queue (LinkedList): regular non-priority queue
  * 
  * Metrics:
- * - Thời gian enqueue 10,000 cuộc gọi
- * - Thời gian dequeue 10,000 cuộc gọi
- * - Tổng thời gian xử lý
+ * - Time to enqueue 10,000 calls
+ * - Time to dequeue 10,000 calls
+ * - Total processing time
  */
 public class Exp1_PriorityQueue {
 
@@ -26,12 +26,12 @@ public class Exp1_PriorityQueue {
 
     public void run() {
         System.out.println("  ╔═══════════════════════════════════════════════════════╗");
-        System.out.println("  ║  THỰC NGHIỆM 1: PRIORITY QUEUE PERFORMANCE          ║");
+        System.out.println("  ║  EXPERIMENT 1: PRIORITY QUEUE PERFORMANCE             ║");
         System.out.println("  ╠═══════════════════════════════════════════════════════╣");
-        System.out.println("  ║  Dữ liệu: " + DATA_SIZE + " cuộc gọi ngẫu nhiên              ║");
+        System.out.println("  ║  Data: " + DATA_SIZE + " random calls                      ║");
         System.out.println("  ╚═══════════════════════════════════════════════════════╝");
 
-        // Sinh dữ liệu test
+        // Generate test data
         List<Call> testData = generateTestData(DATA_SIZE);
 
         // --- Test PriorityCallQueue ---
@@ -60,8 +60,8 @@ public class Exp1_PriorityQueue {
 
         System.out.println("      Enqueue " + DATA_SIZE + " items: " + enqueueTimeMs + " ms");
         System.out.println("      Dequeue " + DATA_SIZE + " items: " + dequeueTimeMs + " ms");
-        System.out.println("      Tổng thời gian: " + (enqueueTimeMs + dequeueTimeMs) + " ms");
-        System.out.println("      Sắp xếp đúng thứ tự ưu tiên: " + (sortedCorrectly ? "✓ Đúng" : "✗ Sai"));
+        System.out.println("      Total time: " + (enqueueTimeMs + dequeueTimeMs) + " ms");
+        System.out.println("      Sorted correctly by priority: " + (sortedCorrectly ? "✓ Correct" : "✗ Incorrect"));
 
         // --- Test FIFO Queue ---
         System.out.println("\n  [2] FIFO Queue (LinkedList):");
@@ -83,29 +83,29 @@ public class Exp1_PriorityQueue {
 
         System.out.println("      Enqueue " + DATA_SIZE + " items: " + fifoEnqMs + " ms");
         System.out.println("      Dequeue " + DATA_SIZE + " items: " + fifoDeqMs + " ms");
-        System.out.println("      Tổng thời gian: " + (fifoEnqMs + fifoDeqMs) + " ms");
+        System.out.println("      Total time: " + (fifoEnqMs + fifoDeqMs) + " ms");
 
-        // --- Kết luận ---
-        System.out.println("\n  ─── KẾT LUẬN ───");
-        System.out.println("  PriorityQueue tổng: " + (enqueueTimeMs + dequeueTimeMs) + " ms");
-        System.out.println("  FIFO Queue tổng   : " + (fifoEnqMs + fifoDeqMs) + " ms");
+        // --- Conclusion ---
+        System.out.println("\n  ─── CONCLUSION ───");
+        System.out.println("  PriorityQueue Total: " + (enqueueTimeMs + dequeueTimeMs) + " ms");
+        System.out.println("  FIFO Queue Total   : " + (fifoEnqMs + fifoDeqMs) + " ms");
 
         if ((enqueueTimeMs + dequeueTimeMs) > (fifoEnqMs + fifoDeqMs)) {
             long diff = (enqueueTimeMs + dequeueTimeMs) - (fifoEnqMs + fifoDeqMs);
-            System.out.println("  → PriorityQueue chậm hơn " + diff + " ms do chi phí sắp xếp heap.");
-            System.out.println("  → Tuy nhiên, PriorityQueue đảm bảo thứ tự ưu tiên chính xác!");
+            System.out.println("  → PriorityQueue is slower by " + diff + " ms due to heap sorting overhead.");
+            System.out.println("  → However, PriorityQueue guarantees correct priority ordering!");
         } else {
-            System.out.println("  → PriorityQueue hoạt động hiệu quả tương đương FIFO.");
+            System.out.println("  → PriorityQueue performs comparably to FIFO.");
         }
         System.out.println("  ══════════════════════════════════════════════════════");
     }
 
     /**
-     * Sinh dữ liệu test ngẫu nhiên.
+     * Generates random test data.
      */
     private List<Call> generateTestData(int count) {
         List<Call> data = new ArrayList<>();
-        Random random = new Random(42); // seed cố định để tái lập
+        Random random = new Random(42); // fixed seed for reproducibility
 
         for (int i = 0; i < count; i++) {
             boolean isVIP = random.nextInt(100) < 15;

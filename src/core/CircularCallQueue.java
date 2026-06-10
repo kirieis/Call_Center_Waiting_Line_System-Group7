@@ -7,12 +7,12 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 /**
- * Hàng đợi vòng (Circular Queue) sử dụng mảng cố định.
+ * Circular Queue using a fixed-size array.
  * 
- * Giới hạn số cuộc gọi chờ tối đa trong hệ thống.
- * Khi hàng đợi đầy, cuộc gọi mới sẽ bị đánh dấu MISSED.
+ * Caps the maximum number of waiting calls in the system.
+ * When the queue is full, new calls will be marked as MISSED.
  * 
- * Sử dụng con trỏ front/rear và phép modulo để quản lý vòng tròn.
+ * Uses front/rear pointers and modulo arithmetic to manage the queue.
  * 
  * Implements StandardQueue<Call>.
  */
@@ -25,15 +25,15 @@ public class CircularCallQueue implements StandardQueue<Call> {
     private int count;
 
     /**
-     * Khởi tạo hàng đợi vòng với dung lượng mặc định 100.
+     * Initializes circular queue with default capacity of 100.
      */
     public CircularCallQueue() {
         this(100);
     }
 
     /**
-     * Khởi tạo hàng đợi vòng với dung lượng tùy chỉnh.
-     * @param capacity số phần tử tối đa
+     * Initializes circular queue with custom capacity.
+     * @param capacity maximum number of elements
      */
     public CircularCallQueue(int capacity) {
         this.capacity = capacity;
@@ -44,15 +44,15 @@ public class CircularCallQueue implements StandardQueue<Call> {
     }
 
     /**
-     * Thêm cuộc gọi vào hàng đợi vòng.
-     * Nếu đầy, cuộc gọi bị đánh dấu MISSED và không được thêm.
+     * Enqueues a call to the circular queue.
+     * If full, the call is marked as MISSED and not added.
      */
     @Override
     public void enqueue(Call call) {
         if (isFull()) {
             call.setStatus(CallStatus.MISSED);
-            System.out.println("  [!] Hàng đợi vòng đầy! Cuộc gọi của " 
-                    + call.getCustomerName() + " bị MISSED.");
+            System.out.println("  [!] Circular queue is full! Call from " 
+                    + call.getCustomerName() + " was MISSED.");
             return;
         }
         rear = (rear + 1) % capacity;
@@ -61,12 +61,12 @@ public class CircularCallQueue implements StandardQueue<Call> {
     }
 
     /**
-     * Lấy và xóa cuộc gọi đầu hàng đợi (FIFO).
+     * Dequeues and returns the first call (FIFO).
      */
     @Override
     public Call dequeue() {
         if (isEmpty()) {
-            throw new NoSuchElementException("Hàng đợi vòng rỗng!");
+            throw new NoSuchElementException("Circular queue is empty!");
         }
         Call call = elements[front];
         elements[front] = null;
@@ -76,12 +76,12 @@ public class CircularCallQueue implements StandardQueue<Call> {
     }
 
     /**
-     * Xem cuộc gọi đầu hàng đợi mà không xóa.
+     * Peeks at the first call without removing it.
      */
     @Override
     public Call peek() {
         if (isEmpty()) {
-            throw new NoSuchElementException("Hàng đợi vòng rỗng!");
+            throw new NoSuchElementException("Circular queue is empty!");
         }
         return elements[front];
     }
@@ -97,22 +97,22 @@ public class CircularCallQueue implements StandardQueue<Call> {
     }
 
     /**
-     * Kiểm tra hàng đợi vòng có đầy không.
-     * @return true nếu đầy
+     * Checks if the circular queue is full.
+     * @return true if full
      */
     public boolean isFull() {
         return count == capacity;
     }
 
     /**
-     * Lấy dung lượng tối đa.
+     * Gets maximum capacity.
      */
     public int getCapacity() {
         return capacity;
     }
 
     /**
-     * Chuyển hàng đợi vòng thành danh sách (theo thứ tự FIFO).
+     * Converts circular queue elements to a List (in FIFO order).
      */
     @Override
     public List<Call> toList() {
