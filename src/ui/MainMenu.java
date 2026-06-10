@@ -1,5 +1,6 @@
 package ui;
 
+
 import core.CallProcessor;
 import core.CallRouter;
 import model.Call;
@@ -14,6 +15,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
 import java.util.Properties;
+
 
 /**
  * Main menu loop of the Call Center system.
@@ -93,7 +95,7 @@ public class MainMenu {
         }
 
         input.close();
-        System.out.println("\n  ★ Thank you for using the system! Goodbye. ★\n");
+        System.out.println("\n   Thank you for using the system! Goodbye. \n");
     }
 
     /**
