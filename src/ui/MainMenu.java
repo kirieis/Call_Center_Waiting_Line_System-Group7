@@ -1,6 +1,6 @@
 package ui;
 
-
+import config.ConfigLoader;
 import core.CallProcessor;
 import core.CallRouter;
 import model.Call;
@@ -11,11 +11,7 @@ import experiment.Exp1_PriorityQueue;
 import experiment.Exp2_AgingAlgorithm;
 import experiment.Exp3_HistoryLookup;
 
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.List;
-import java.util.Properties;
-
 
 /**
  * Main menu loop of the Call Center system.
@@ -41,7 +37,7 @@ public class MainMenu {
     private ConsoleRenderer renderer;
     private CallProcessor processor;
     private DataGenerator dataGen;
-    private Properties config;
+    private ConfigLoader configLoader;
 
     // Default paths and values
     private String rawDataPath;
@@ -50,6 +46,7 @@ public class MainMenu {
     private int generateCount;
 
     public MainMenu() {
+        this.configLoader = new ConfigLoader();
         loadConfig();
         this.router = new CallRouter(circularCapacity);
         this.historyStore = new CallHistoryStore(historyPath);
@@ -63,21 +60,14 @@ public class MainMenu {
      * Reads configuration from settings.properties file.
      */
     private void loadConfig() {
-        config = new Properties();
-        try (FileInputStream fis = new FileInputStream("src/config/settings.properties")) {
-            config.load(fis);
-        } catch (IOException e) {
-            System.out.println("  [!] settings.properties not found, using default values.");
-        }
-
-        rawDataPath = config.getProperty("data.raw.calls.path", "data/CustomerCalls.csv");
-        historyPath = config.getProperty("data.call.history.path", "data/call_history.csv");
-        circularCapacity = Integer.parseInt(config.getProperty("circular.queue.capacity", "100"));
-        generateCount = Integer.parseInt(config.getProperty("generator.default.count", "10000"));
+        rawDataPath = configLoader.getRawDataPath();
+        historyPath = configLoader.getHistoryPath();
+        circularCapacity = configLoader.getCircularQueueCapacity();
+        generateCount = configLoader.getGenerateCount();
 
         // Configure priority scoring
-        int vipBonus = Integer.parseInt(config.getProperty("priority.vip.bonus", "50"));
-        int repeatMul = Integer.parseInt(config.getProperty("priority.repeat.multiplier", "10"));
+        int vipBonus = configLoader.getVipBonus();
+        int repeatMul = configLoader.getRepeatMultiplier();
         Call.setVipBonus(vipBonus);
         Call.setRepeatMultiplier(repeatMul);
     }
@@ -121,6 +111,7 @@ public class MainMenu {
 
     /**
      * Handles selection from the menu.
+     * 
      * @return false if operator selects exit
      */
     private boolean handleChoice(int choice) {
@@ -177,7 +168,7 @@ public class MainMenu {
 
         // Assign sorted queue to router
         router.setPriorityQueue(processor.getQueue());
-        renderer.renderMessage("Priority queue is ready. Total: " 
+        renderer.renderMessage("Priority queue is ready. Total: "
                 + router.getQueueSize() + " calls.");
     }
 
