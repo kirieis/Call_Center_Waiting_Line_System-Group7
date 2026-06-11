@@ -9,7 +9,7 @@ import storage.CallHistoryStore;
 import storage.DataGenerator;
 import experiment.Exp1_PriorityQueue;
 import experiment.Exp2_AgingAlgorithm;
-import experiment.Exp3_HistoryLookup;
+import experiment.Exp3_CallbackFairness;
 
 import java.util.List;
 
@@ -285,7 +285,7 @@ public class MainMenu {
                 new Exp2_AgingAlgorithm().run();
                 break;
             case 3:
-                new Exp3_HistoryLookup().run();
+                new Exp3_CallbackFairness().run();
                 break;
             case 4:
                 System.out.println("\n  === Running all experiments ===\n");
@@ -293,7 +293,7 @@ public class MainMenu {
                 System.out.println();
                 new Exp2_AgingAlgorithm().run();
                 System.out.println();
-                new Exp3_HistoryLookup().run();
+                new Exp3_CallbackFairness().run();
                 break;
             case 0:
                 break;
