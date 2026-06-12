@@ -4,5 +4,5 @@
 - Nguyễn Văn An
 ## Description:
 
-- Hệ thống giả lập quá trình quản lý cuộc gọi chờ, ưu tiên khách hàng VIP hoặc khách hàng gọi lại nhiều lần.
-- Chạy trên Console only.
+- Simulates the process of handling call waiting, prioritizing VIP customers or customers who call back multiple times.
+- Run on console only.
