@@ -49,7 +49,7 @@ public class DataGenerator {
     /**
      * Generates N random calls and writes them to a CSV file.
      * 
-     * @param count number of calls to generate (default 10,000)
+     * @param count      number of calls to generate (default 10,000)
      * @param outputPath output CSV file path
      */
     public void generate(int count, String outputPath) {
@@ -71,8 +71,7 @@ public class DataGenerator {
                     customerName,
                     phoneNumber,
                     String.valueOf(isVIP),
-                    String.valueOf(repeatCalls)
-            );
+                    String.valueOf(repeatCalls));
             lines.add(line);
         }
 
@@ -81,7 +80,8 @@ public class DataGenerator {
     }
 
     /**
-     * Generates random name in Vietnamese format (Last name + Middle name + First name).
+     * Generates random name in Vietnamese format (Last name + Middle name + First
+     * name).
      */
     private String randomName() {
         String ho = HO[random.nextInt(HO.length)];
@@ -96,7 +96,7 @@ public class DataGenerator {
     private String randomPhone() {
         StringBuilder sb = new StringBuilder("0");
         // Common prefixes
-        String[] dauSo = {"90", "91", "93", "94", "96", "97", "98", "86", "83", "84", "85", "88", "89"};
+        String[] dauSo = { "90", "91", "93", "94", "96", "97", "98", "86", "83", "84", "85", "88", "89" };
         sb = new StringBuilder("0" + dauSo[random.nextInt(dauSo.length)]);
         for (int i = 0; i < 7; i++) {
             sb.append(random.nextInt(10));
@@ -105,24 +105,24 @@ public class DataGenerator {
     }
 
     /**
-     * Generates random VIP status (~15% VIP rate).
+     * Generates random VIP status (~30% VIP rate).
      */
     private boolean randomVIP() {
-        return random.nextInt(100) < 15;
+        return random.nextInt(100) < 30;
     }
 
     /**
      * Generates random number of repeat calls (0-10).
-     * Distribution: 60% have 0, 25% have 1-3, 15% have 4-10.
+     * Distribution: 50% have 0-25 call, 25% have 0-35 call, 25% have 0-50 call.
      */
     private int randomRepeatCalls() {
         int rand = random.nextInt(100);
-        if (rand < 60) {
-            return 0;
-        } else if (rand < 85) {
-            return 1 + random.nextInt(3);
+        if (rand < 50) {
+            return random.nextInt(25);
+        } else if (rand < 75) {
+            return random.nextInt(35);
         } else {
-            return 4 + random.nextInt(7);
+            return random.nextInt(50);
         }
     }
 }
