@@ -266,7 +266,7 @@ public class MainMenu {
         String[] expOptions = {
                 "1. Exp1 - Priority Queue Performance",
                 "2. Exp2 - Aging Algorithm Test",
-                "3. Exp3 - History Lookup Benchmark",
+                "3. Exp3 - Call Back Fairness Queue",
                 "4. Run all",
                 "0. Go back"
         };
