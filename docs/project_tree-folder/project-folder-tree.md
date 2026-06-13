@@ -2,7 +2,6 @@
 
 ## 📁 Complete Directory Structure
 
-
 Call_Center_Waiting_Line_System-Group7/
 │
 ├── 📄 README.md
@@ -68,73 +67,3 @@ Call_Center_Waiting_Line_System-Group7/
 │
 └── 📁 out/                              # Output directory (build artifacts)
     └── [Compiled class files & artifacts]
-```
-
----
-
-## 📊 Project Structure Summary
-
-### Key Directories:
-
-| Directory | Purpose | Contains |
-|-----------|---------|----------|
-| `src/` | Source code | All Java source files organized by module |
-| `src/config/` | Configuration management | Settings loader and properties |
-| `src/core/` | Core algorithms | Queue implementations, routing, processing |
-| `src/model/` | Data models | Call and CallStatus classes |
-| `src/experiment/` | Testing & experiments | Experiment implementations |
-| `src/storage/` | Data persistence | File handling and storage logic |
-| `src/ui/` | User interface | Console rendering and menu system |
-| `data/` | Data files | CSV files with call history data |
-| `docs/` | Documentation | Diagrams, logs, and project information |
-| `out/` | Build output | Compiled class files |
-
----
-
-## 📝 File Statistics
-
-### Java Source Files:
-- **Total Java files**: 19
-- **Core modules**: 6 files (queue, routing, processing)
-- **Model classes**: 2 files
-- **Experiment files**: 4 files
-- **Storage utilities**: 3 files
-- **UI components**: 3 files
-- **Config**: 1 file
-
-### Data Files:
-- **CSV files**: 2 (call_history.csv, CustomerCalls.csv)
-
-### Documentation:
-- **Diagrams**: 2 (class & use case diagrams)
-- **Logs**: 2 (markdown & Excel)
-
----
-
-## 🎯 Module Breakdown
-
-### Core Business Logic Modules:
-1. **Queue Management**: `CircularCallQueue.java`, `PriorityCallQueue.java`, `StandardQueue.java`
-2. **Call Processing**: `CallProcessor.java`, `CallRouter.java`
-3. **Algorithms**: `AgingAlgorithm.java`
-4. **Configuration**: `ConfigLoader.java`, `settings.properties`
-
-### Data Layer:
-- `Call.java` - Call entity model
-- `CallStatus.java` - Status tracking
-- `CallHistoryStore.java` - Storage operations
-- `FileHandler.java` - File I/O
-- `DataGenerator.java` - Data generation
-
-### Presentation Layer:
-- `MainMenu.java` - Menu navigation
-- `ConsoleRenderer.java` - Output rendering
-- `InputHandler.java` - Input processing
-
-### Entry Point:
-- `Main.java` - Application bootstrap
-
----
-
-
-
